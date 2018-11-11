@@ -54,6 +54,20 @@ RUN set -e \
 
 CMD ["erl"]
 
+ENV REBAR_VERSION="2.6.4"
+
+RUN set -xe \
+	&& REBAR_DOWNLOAD_URL="https://github.com/rebar/rebar/archive/${REBAR_VERSION}.tar.gz" \
+	&& REBAR_DOWNLOAD_SHA256="577246bafa2eb2b2c3f1d0c157408650446884555bf87901508ce71d5cc0bd07" \
+	&& mkdir -p /usr/src/rebar-src \
+	&& curl -fSL -o rebar-src.tar.gz "$REBAR_DOWNLOAD_URL" \
+	&& echo "$REBAR_DOWNLOAD_SHA256 rebar-src.tar.gz" | sha256sum -c - \
+	&& tar -xzf rebar-src.tar.gz -C /usr/src/rebar-src --strip-components=1 \
+	&& rm rebar-src.tar.gz \
+	&& cd /usr/src/rebar-src \
+	&& ./bootstrap \
+	&& install -v ./rebar /usr/local/bin/ \
+	&& rm -rf /usr/src/rebar-src
 
 ARG REBAR3_VERSION="3.6.2"
 
