@@ -23,13 +23,13 @@ RUN set -xe \
         && echo "$OPENSSL_DOWNLOAD_SHA256 openssl.tar.gz" | sha256sum -c - \
         && tar -zxf openssl.tar.gz -C /tmp/openssl --strip-components=1 \
         && ( cd /tmp/openssl \
-                && ./Configure \
-                    --prefix=/usr/local/ssl \
-                    --openssldir=/usr/local/ssl \
-                   linux-x86_64 \
-                   shared \
-                && make -j$(nproc) \
-                && make install ) \
+             && ./Configure \
+                     --prefix=/usr/local/ssl \
+                     --openssldir=/usr/local/ssl \
+                    linux-x86_64 \
+                    shared \
+             && make -j$(nproc) \
+             && make install ) \
         && rm -Rf /tmp/openssl*
 
 ARG OTP_VERSION="20.3.8.11"
@@ -46,8 +46,8 @@ RUN set -e \
         && ( cd $ERL_TOP \
              && ./otp_build autoconf \
              && ./configure \
-                 --disable-dynamic-ssl-lib \
-                 --with-ssl=/usr/local/ssl \
+                     --disable-dynamic-ssl-lib \
+                     --with-ssl=/usr/local/ssl \
              && make -j$(nproc) \
              && make install ) \
         && find /usr/local -name examples | xargs rm -rf
