@@ -1,36 +1,9 @@
-FROM amazonlinux:2017.03.1.20170812
+FROM lambci/lambda-base:build
 
+# install build dependencies, not provided by lambda-base:build image
 RUN set -e \
    && yum -y install \
-      autoconf \
-      gcc \
-      gcc-c++ \
-      git \
-      glibc-devel \
-      make \
-      ncurses-devel \
-      tar \
-      zip
-
-ARG SSL_VERSION="1.1.1"
-
-RUN set -xe \
-        && OPENSSL_DOWNLOAD_URL="http://www.openssl.org/source/openssl-${SSL_VERSION}.tar.gz" \
-        && OPENSSL_DOWNLOAD_SHA256="2836875a0f89c03d0fdf483941512613a50cfb421d6fd94b9f41d7279d586a3d" \
-        && mkdir -p /tmp/openssl \
-        && cd /tmp \
-        && curl -fSL -o openssl.tar.gz "$OPENSSL_DOWNLOAD_URL" \
-        && echo "$OPENSSL_DOWNLOAD_SHA256 openssl.tar.gz" | sha256sum -c - \
-        && tar -zxf openssl.tar.gz -C /tmp/openssl --strip-components=1 \
-        && ( cd /tmp/openssl \
-             && ./Configure \
-                     --prefix=/usr/local/ssl \
-                     --openssldir=/usr/local/ssl \
-                    linux-x86_64 \
-                    shared \
-             && make -j$(nproc) \
-             && make install ) \
-        && rm -Rf /tmp/openssl*
+      ncurses-devel
 
 ARG OTP_VERSION="20.3.8.11"
 
@@ -46,8 +19,6 @@ RUN set -e \
         && ( cd $ERL_TOP \
              && ./otp_build autoconf \
              && ./configure \
-                     --disable-dynamic-ssl-lib \
-                     --with-ssl=/usr/local/ssl \
              && make -j$(nproc) \
              && make install ) \
         && find /usr/local -name examples | xargs rm -rf
