@@ -60,7 +60,7 @@ $ docker run -it --rm -v `pwd`:/buildroot -w /buildroot alertlogic/erllambda:20.
 
 1. Erlang images are based on `lambci/lambda-base:build` [image](https://github.com/lambci/docker-lambda),
    which replicates the live AWS Lambda environment almost identically.
-2. Erlang OTP is built from source code.
+2. Erlang OTP is built from [source code](https://github.com/erlang/otp).
 3. Elixir images are based on `alertlogic/erllambda:<version>` images.
-4. `rebar` and `rebar3` tools are bundled in Erlang images.
-5. `mix` tool is bundled in Elixir images.
+4. [rebar](https://github.com/rebar/rebar) and [rebar3](https://github.com/erlang/rebar3) tools are built from source and bundled in Erlang images.
+5. [mix](https://hexdocs.pm/mix/Mix.html) tool is installed from [hex](http://hex.pm) and bundled in Elixir images.
