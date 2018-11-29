@@ -20,7 +20,7 @@ run and deploy Erlang AWS Lambda functions.
 Simply pull image from docker hub with a required Erlang version:
 
 ``` console
-$ docker pull alertlogic/erllambda:20.3 ./erllambda_docker/20
+$ docker pull alertlogic/erllambda:20.3
 ```
 
 #### Build image from sources
