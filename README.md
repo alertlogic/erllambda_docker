@@ -28,7 +28,7 @@ $ docker pull alertlogic/erllambda:20.3 ./erllambda_docker/20
 To build image locally clone repository:
 
 ```console
-$ git clone git@github.com/alertlogic/erllambda_docker
+$ git clone https://github.com/alertlogic/erllambda_docker.git
 ```
 
 Specify path to a `Dockerfile` with a required version to build an image:
