@@ -15,8 +15,6 @@ run and deploy Erlang AWS Lambda functions.
 
 #### Pull from official docker hub registry
 
-**NOTE:** Images are not yet publicly available. Should be published at the end of November.
-
 Simply pull image from docker hub with a required Erlang version:
 
 ``` console
