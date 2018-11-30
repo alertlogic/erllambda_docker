@@ -1,4 +1,4 @@
-FROM erllambda:20.3
+FROM alertlogic/erllambda:20.3
 
 ARG ELIXIR_VERSION=1.7.4
 ENV LANG=en_US.UTF-8 \
