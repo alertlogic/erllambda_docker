@@ -1,0 +1,20 @@
+language: bash
+services: docker
+
+env:
+  - DIR=21
+  - DIR=20
+  - DIR=elixir
+
+install:
+  - git clone https://github.com/docker-library/official-images.git ~/official-images
+
+before_script:
+  - cd "$DIR"
+
+script:
+    - docker build --pull -t "$DIR" .
+    - ~/official-images/test/run.sh "$DIR"
+
+after_script:
+  - docker images
