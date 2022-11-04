@@ -29,7 +29,6 @@ RUN set -e \
              && ./configure \
              && make -j$(nproc) \
              && make install ) \
-        && rm -rf $ERL_TOP \
         && find /usr/local -name examples | xargs rm -rf
 
 CMD ["erl"]
