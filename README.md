@@ -18,7 +18,7 @@ run and deploy Erlang AWS Lambda functions.
 Simply pull image from docker hub with a required Erlang version:
 
 ``` console
-$ docker pull alertlogic/erllambda:20.3
+$ docker pull alertlogic/erllambda:21.3
 ```
 
 #### Build image from sources
@@ -32,7 +32,8 @@ $ git clone https://github.com/alertlogic/erllambda_docker.git
 Specify path to a `Dockerfile` with a required version to build an image:
 
 ``` console
-$ docker build -t alertlogic/erllambda:20.3 ./erllambda_docker/20
+$ docker buildx build --platform linux/amd64,linux/arm64  -t alertlogic/erllambda:21.3 ./21 --push
+$ docker buildx build --platform linux/amd64,linux/arm64  -t alertlogic/erllambda:21.3-elixir ./elixir --push
 ```
 
 ### Running
@@ -40,17 +41,17 @@ $ docker build -t alertlogic/erllambda:20.3 ./erllambda_docker/20
 #### Erlang shell
 
 ```console
-$ docker run -it --rm alertlogic/erllambda:20.3
-Erlang/OTP 20 [erts-9.3.3.5] [source] [64-bit] [smp:3:3] [ds:3:3:10] [async-threads:10] [hipe] [kernel-poll:false]
+$ docker run -it --rm alertlogic/erllambda:21.3
+Erlang/OTP 21 [erts-10.3.5.16] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1]
 
-Eshell V9.3.3.5  (abort with ^G)
+Eshell V10.3.5.16  (abort with ^G)
 1>
 ```
 
 #### Build a package ([rebar3_erllambda](https://github.com/alertlogic/rebar3_erllambda) example)
 
 ``` console
-$ docker run -it --rm -v `pwd`:/buildroot -w /buildroot alertlogic/erllambda:20.3 \
+$ docker run -it --rm -v `pwd`:/buildroot -w /buildroot alertlogic/erllambda:21.3 \
       rebar3 as prod erllambda zip
 ```
 

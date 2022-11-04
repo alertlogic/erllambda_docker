@@ -3,7 +3,6 @@ services: docker
 
 env:
   - DIR=21
-  - DIR=20
   - DIR=elixir
 
 install:
@@ -13,7 +12,7 @@ before_script:
   - cd "$DIR"
 
 script:
-    - docker build --pull -t "$DIR" .
+    - docker buildx build --platform linux/amd64,linux/arm64 --pull -t "$DIR" .
     - ~/official-images/test/run.sh "$DIR"
 
 after_script:
